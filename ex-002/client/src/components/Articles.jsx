@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import BookmarkContext from "./../store/BookmarkContext";
 import dummyArticles from "../data/dummyArticles";
@@ -20,6 +20,7 @@ const ArticleList = ({ children }) => {
 };
 
 const Articles = () => {
+  const [articles, setArticles] = useState([]);
   const bookmarkCtx = useContext(BookmarkContext);
 
   const isBookmarked = (article) => {
@@ -36,9 +37,17 @@ const Articles = () => {
     bookmarkCtx.bookmarkArticle(article);
   };
 
+  useEffect(() => {
+    fetch("http://localhost:4000/articles")
+      .then((res) => res.json())
+      .then((res) => {
+        setArticles(res.data);
+      });
+  }, []);
+
   return (
     <ArticleList>
-      {dummyArticles.map((article) => (
+      {articles.map((article) => (
         <ArticleItem
           key={article.id}
           article={article}

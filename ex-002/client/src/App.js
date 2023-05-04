@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import NewsPage from "./pages/NewsPage";
 import AddArticlePage from "./pages/AddArticlePage";
 import "./App.css";
-import Button from "../../../../react-state-1/ex-003/src/components/Button";
 
 function App() {
   return (
